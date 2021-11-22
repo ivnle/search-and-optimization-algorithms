@@ -84,10 +84,10 @@ if __name__ == '__main__':
     print(f'final x value: {x_hist[-1]}')
     print(f'final f value: {f_hist[-1]}')
     print(f'iterations: {iterations-1}')
-    print(f_hist)
 
     # plot f_hist
     plt.plot(f_hist)
     plt.xlabel('iteration')
     plt.ylabel('$f(x)$')
+    plt.title('Cross Entropy Methods')
     plt.show()

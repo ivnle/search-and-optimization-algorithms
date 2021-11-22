@@ -74,7 +74,7 @@ if __name__ == '__main__':
 
     x0 = x_init = np.full(3, 2.)
     n_samples = 100
-    iterations = 500
+    iterations = 400
     step_size = 0.001
 
     x_hist, f_hist, iterations = search_gradient(f, x0, n_samples, iterations, step_size)
@@ -92,4 +92,5 @@ if __name__ == '__main__':
     plt.plot(f_hist)
     plt.xlabel('iteration')
     plt.ylabel('$f(x)$')
+    plt.title('Search gradient')
     plt.show()

@@ -18,7 +18,7 @@ def log_annealing_schedule(T, i):
     den = np.log(i+1)
     return num / den
 
-def simulated_annealing(f, x0, T, tolerance):
+def simulated_annealing(f, x0, T, tolerance, max_iterations):
     """
     Args:
         f: function to minimize
@@ -63,7 +63,7 @@ def simulated_annealing(f, x0, T, tolerance):
 
         # if f_hist[-1] - f_hist[-2] < tolerance:
         #     break
-        if iterations > 1000:
+        if iterations > max_iterations:
             break
 
     return x_hist, f_hist, iterations
@@ -88,8 +88,9 @@ if __name__ == '__main__':
     x0 = x_init = np.full(3, 2.)
     tolerance = 1e-5
     T = 100
+    iterations = 100
 
-    x_hist, f_hist, iterations = simulated_annealing(f, x0, T, tolerance)
+    x_hist, f_hist, iterations = simulated_annealing(f, x0, T, tolerance, iterations)
     print(f'final x value: {x_hist[-1]}')
     print(f'final f value: {f_hist[-1]}')
     print(f'iterations: {iterations-1}')
@@ -98,4 +99,5 @@ if __name__ == '__main__':
     plt.plot(f_hist)
     plt.xlabel('iteration')
     plt.ylabel('$f(x)$')
+    plt.title('Simulated annealing')
     plt.show()

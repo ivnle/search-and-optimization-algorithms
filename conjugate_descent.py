@@ -60,7 +60,6 @@ def conjugate_descent(f, gf, hf, x0, tolerance):
         f_hist.append(f(x))
         iterations += 1
 
-        print('p:', p)
         if np.linalg.norm(p) < tolerance:
             break
 
@@ -70,9 +69,6 @@ def conjugate_descent(f, gf, hf, x0, tolerance):
 if __name__ == '__main__':
 
     def f(x: np.ndarray) -> float:
-        """
-        f(x) = x_1**2 + x_2**2 + x_3**2 ... + x_n**2
-        """
         Q = np.array([[2, 0, 0],
                       [0, 4, 0],
                       [0, 0, 6]])
@@ -80,8 +76,6 @@ if __name__ == '__main__':
         return 0.5 * (x.T @ Q @ x) - (b.T @ x)
 
     def gf(x: np.ndarray) -> np.ndarray:
-        """
-        """
         Q = np.array([[2, 0, 0],
                       [0, 4, 0],
                       [0, 0, 6]])
@@ -89,8 +83,6 @@ if __name__ == '__main__':
         return Q @ x - b
 
     def hf(x: np.ndarray) -> np.ndarray:
-        """
-        """
         Q = np.array([[2, 0, 0],
                       [0, 4, 0],
                       [0, 0, 6]])
@@ -101,12 +93,13 @@ if __name__ == '__main__':
 
     x_hist, f_hist, iterations = conjugate_descent(
         f, gf, hf, x0, tolerance)
-    print(f'final x value: {x_hist[-1]}')
-    print(f'final f value: {f_hist[-1]}')
-    print(f'iterations: {iterations-1}')
+    print(f'min x value: {x_hist[-1]}')
+    print(f'min f value: {f_hist[-1]}')
+    print(f'iterations to find minimum (within tolerance): {iterations-1}')
 
     # plot f_hist
     plt.plot(f_hist)
     plt.xlabel('iteration')
     plt.ylabel('$f(x)$')
+    plt.title('Conjugate descent')
     plt.show()

@@ -129,7 +129,7 @@ def a_star_search(maze, start_position, goal_position):
                 if child.f < frontier[frontier.index(child)].f:
                     frontier[frontier.index(child)] = child
         
-    print('No path found.')
+    print('No path exists from start to goal.')
 
 
 def get_path(node):
@@ -146,7 +146,7 @@ if __name__ == '__main__':
     np.random.seed(1)
 
     maze, start_position, goal_position = construct_maze(
-        n_rows=5, n_cols=10, pct_obstacles=0.2)
+        n_rows=10, n_cols=10, pct_obstacles=0.2)
 
     print(maze)
 
@@ -154,7 +154,7 @@ if __name__ == '__main__':
     
     path = get_path(goal_node)
 
-    print(path)
+    print(f'Least cost path: {path}')
 
-    # TODO add visualization of path
+    # TODO add visualization of how frontier and explored sets are updated over each iteration
 
