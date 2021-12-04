@@ -45,32 +45,32 @@ def newton_descent(f, gf, hf, x0, step_size, tolerance):
 
 if __name__ == '__main__':
 
-    # def f(x: np.ndarray) -> float:
-    #     """
-    #     f(x) = x_1**2 + x_2**2 + x_3**2 ... + x_n**2
-    #     """
-    #     return np.linalg.norm(x)**2
-
-    # def gf(x: np.ndarray) -> np.ndarray:
-    #     """
-    #     gf(x) = 2 * x
-    #     """
-    #     return 2 * x
-
-    # def hf(x: np.ndarray) -> np.ndarray:
-    #     """
-    #     hf(x) = 2 * np.eye(n)
-    #     """
-    #     return 2 * np.eye(len(x))
-
-    # x0 = np.array([2., 4., -1., 1.])
-
     def f(x: np.ndarray) -> float:
-        Q = np.array([[2, 0, 0],
-                      [0, 4, 0],
-                      [0, 0, 6]])
-        b = np.array([2, 2, 2])
-        return 0.5 * (x.T @ Q @ x) - (b.T @ x)    
+        """
+        f(x) = x_1**2 + x_2**2 + x_3**2 ... + x_n**2
+        """
+        return np.linalg.norm(x)**2
+
+    def gf(x: np.ndarray) -> np.ndarray:
+        """
+        gf(x) = 2 * x
+        """
+        return 2 * x
+
+    def hf(x: np.ndarray) -> np.ndarray:
+        """
+        hf(x) = 2 * np.eye(n)
+        """
+        return 2 * np.eye(len(x))
+
+    x0 = np.array([2., 4., -1., 1.])
+
+    # def f(x: np.ndarray) -> float:
+    #     Q = np.array([[2, 0, 0],
+    #                   [0, 4, 0],
+    #                   [0, 0, 6]])
+    #     b = np.array([2, 2, 2])
+    #     return 0.5 * (x.T @ Q @ x) - (b.T @ x)    
 
     x0 = np.array([2., -2., 2])
 
