@@ -2,6 +2,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import gym
+import time
 
 LEFT = 0
 DOWN = 1
@@ -50,21 +51,30 @@ def value_iteration(P, nS, nA, gamma, tolerance):
     return value_function, policy
 
 
+def heatmap_value_func(value_func):
+    import matplotlib.pyplot as plt
+    import seaborn as sns
+    sns.set()
+    sns.heatmap(value_func)
+    plt.show()
+
+
 if __name__ == '__main__':
 
-    environment = "FrozenLake-v0"
-    env = gym.make(environment).env
-    # env.reset()
-    # for _ in range(3):
-    #     env.render()
-    #     env.step(env.action_space.sample()) # take a random action
-    # env.close()
+    environment = "FrozenLake8x8-v0"
+    env = gym.make(environment)
 
     gamma = 0.9
     tolerance = 1e-3
 
     value_function, policy = value_iteration(
-        env.P, env.nS, env.nA, gamma, tolerance)
-    print(value_function)
-    print(policy)
-    # TODO Use gym's render function to visualize the optimal policy.
+        env.env.P, env.env.nS, env.env.nA, gamma, tolerance)
+
+    print('optimal value function', value_function)
+    print('optimal policy', policy)
+
+    # change shape of value_function to 16,1
+    value_function = np.reshape(value_function, (8, 8))
+
+    heatmap_value_func(value_function)
+
