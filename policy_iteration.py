@@ -2,7 +2,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import gym
-
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 def policy_evaluation(P, nS, nA, policy, gamma=0.9, tol=1e-3):
 
@@ -77,8 +78,6 @@ def policy_iteration(P, nS, nA, gamma=0.9, tol=10e-3, printout=True):
 
 
 def heatmap_value_func(value_func):
-    import matplotlib.pyplot as plt
-    import seaborn as sns
     sns.set()
     sns.heatmap(value_func)
     plt.show()
@@ -86,7 +85,7 @@ def heatmap_value_func(value_func):
 
 if __name__ == '__main__':
 
-    environment = "FrozenLake8x8-v0"
+    environment = "FrozenLake8x8-v1"
     env = gym.make(environment)
 
     gamma = 0.9

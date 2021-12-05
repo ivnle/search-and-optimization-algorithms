@@ -37,7 +37,7 @@ def deep_q_learning(env, gamma, alpha, iterations, eps=0.1):
 
 
 if __name__ == '__main__':
-    environment = "FrozenLake-v0"
+    environment = "FrozenLake-v1"
     # environment = "FrozenLake8x8-v0"
     # environment = "Taxi-v2"
     env = gym.make(environment)
@@ -45,7 +45,7 @@ if __name__ == '__main__':
     gamma = 0.9
     alpha = 0.7
     eps = 0.4
-    iterations = 100000
+    iterations = 1000000
     env.render()
     Q, training_rewards = deep_q_learning(env.env, gamma, alpha, iterations, eps)
     policy = np.argmax(Q, axis=1)

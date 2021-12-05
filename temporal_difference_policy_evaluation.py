@@ -36,7 +36,7 @@ def td_policy_eval(policy, env, gamma, alpha):
 
 
 if __name__ == '__main__':
-    environment = "FrozenLake8x8-v0"
+    environment = "FrozenLake8x8-v1"
     env = gym.make(environment)
     
     gamma = 0.9
