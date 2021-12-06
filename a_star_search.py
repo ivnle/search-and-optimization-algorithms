@@ -143,18 +143,24 @@ def get_path(node):
 
 if __name__ == '__main__':
 
-    np.random.seed(1)
+    #np.random.seed(1)
+    np.random.seed(6)
 
     maze, start_position, goal_position = construct_maze(
-        n_rows=10, n_cols=10, pct_obstacles=0.2)
+        n_rows=10, n_cols=10, pct_obstacles=0.4)
 
     print(maze)
+    plt.imshow(maze)
 
     goal_node = a_star_search(maze, start_position, goal_position)
     
     path = get_path(goal_node)
 
     print(f'Least cost path: {path}')
+
+    for x, y in path:
+        maze[x, y] = 2
+    plt.imshow(maze)
 
     # TODO add visualization of how frontier and explored sets are updated over each iteration
 

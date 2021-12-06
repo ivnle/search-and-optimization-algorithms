@@ -43,7 +43,7 @@ def monte_carlo_policy_eval(policy, env, gamma):
 
 
 if __name__ == '__main__':
-    environment = "FrozenLake8x8-v0"
+    environment = "FrozenLake-v1"
     env = gym.make(environment)
     
     gamma = 0.9
@@ -56,4 +56,4 @@ if __name__ == '__main__':
     # print(value_function)
     # heatmap_value_func(value_function.reshape(8 , -1))
     print(est_val_func)
-    heatmap_value_func(est_val_func.reshape(8 , -1))
+    heatmap_value_func(est_val_func.reshape(4 , -1))

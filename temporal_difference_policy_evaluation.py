@@ -36,9 +36,9 @@ def td_policy_eval(policy, env, gamma, alpha):
 
 
 if __name__ == '__main__':
-    environment = "FrozenLake8x8-v1"
+    environment = "FrozenLake-v1"
     env = gym.make(environment)
-    
+    env.seed(0)
     gamma = 0.9
     tolerance = 1e-3
     alpha = 0.2
@@ -50,4 +50,4 @@ if __name__ == '__main__':
     # print(value_function)
     # heatmap_value_func(value_function.reshape(8 , -1))
     print(est_val_func)
-    heatmap_value_func(est_val_func.reshape(8 , -1))
+    heatmap_value_func(est_val_func.reshape(4 , -1))

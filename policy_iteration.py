@@ -85,7 +85,7 @@ def heatmap_value_func(value_func):
 
 if __name__ == '__main__':
 
-    environment = "FrozenLake8x8-v1"
+    environment = "FrozenLake-v1"
     env = gym.make(environment)
 
     gamma = 0.9
@@ -98,6 +98,6 @@ if __name__ == '__main__':
     print('optimal policy', policy)
 
     # change shape of value_function to 16,1
-    value_function = np.reshape(value_function, (8, 8))
+    value_function = np.reshape(value_function, (4, 4))
 
     heatmap_value_func(value_function)
