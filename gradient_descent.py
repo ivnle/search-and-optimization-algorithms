@@ -55,15 +55,6 @@ if __name__ == '__main__':
         """
         return 2 * x
 
-    x0 = np.array([2., 4., -1., 1.])
-
-    # def f(x: np.ndarray) -> float:
-    #     Q = np.array([[2, 0, 0],
-    #                   [0, 4, 0],
-    #                   [0, 0, 6]])
-    #     b = np.array([2, 2, 2])
-    #     return 0.5 * (x.T @ Q @ x) - (b.T @ x)    
-
     x0 = np.array([2., -2., 2])
 
     step_size = 0.01
