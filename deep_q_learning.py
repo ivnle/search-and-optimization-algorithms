@@ -68,54 +68,7 @@ def choose_action(net, state, epsilon, device):
 
 
 def update_step(policy_net, target_net, replay_mem, gamma, optimizer, loss_fn, batch_size):
-
-    # Sample the data from the replay memory
-    batch = replay_mem.sample(batch_size)
-    batch_size = len(batch)
-
-    # batch: (state, action, next_state, reward)
-    states = torch.tensor([s[0] for s in batch],
-                          dtype=torch.float32, device=device)
-    actions = torch.tensor([s[1] for s in batch],
-                           dtype=torch.int64, device=device)
-    rewards = torch.tensor([s[3] for s in batch],
-                           dtype=torch.float32, device=device)
-
-    # Compute a mask of non-final states (all the elements where the next state is not None)
-    # the next state can be None if the game has ended
-    non_final_next_states = torch.tensor(
-        [s[2] for s in batch if s[2] is not None], dtype=torch.float32, device=device)
-    non_final_mask = torch.tensor(
-        [s[2] is not None for s in batch], dtype=torch.bool)
-
-    # Compute all the Q values (forward pass)
-    policy_net.train()
-    q_values = policy_net(states)
-    # Select the proper Q value for the corresponding action taken Q(s_t, a)
-    state_action_values = q_values.gather(1, actions.unsqueeze(1).cuda())
-
-    # Compute the value function of the next states using the target network V(s_{t+1}) = max_a( Q_target(s_{t+1}, a)) )
-    with torch.no_grad():
-        target_net.eval()
-        q_values_target = target_net(non_final_next_states)
-    next_state_max_q_values = torch.zeros(batch_size, device=device)
-    next_state_max_q_values[non_final_mask] = q_values_target.max(dim=1)[
-        0].detach()
-
-    # Compute the expected Q values
-    expected_state_action_values = rewards + (next_state_max_q_values * gamma)
-    expected_state_action_values = expected_state_action_values.unsqueeze(
-        1)  # Set the required tensor shape
-
-    # Compute the Huber loss
-    loss = loss_fn(state_action_values, expected_state_action_values)
-
-    # Optimize the model
-    optimizer.zero_grad()
-    loss.backward()
-    # Apply gradient clipping (clip all the gradients greater than 2 for training stability)
-    nn.utils.clip_grad_norm_(policy_net.parameters(), 2)
-    optimizer.step()
+    pass
 
 def update_epsilon(epsilon, steps):
     EPS_START = 0.9
@@ -170,7 +123,7 @@ if __name__ == '__main__':
     reward_hist = []
     steps = 0
 
-    for episode_num, traj in enumerate(tqdm(range(episodes))):
+    for episode_num in tqdm(range(episodes)):
         state = env.reset()
         score = 0
         done = False
@@ -186,24 +139,16 @@ if __name__ == '__main__':
             replay_mem.push(state, action, next_state, reward)
             score += reward
 
-            # Update the network
-            # we enable the training only if we have enough samples in the replay memory, otherwise the training will use the same samples too often
             if len(replay_mem) > min_samples_for_training:
                 update_step(policy_net, target_net, replay_mem,
                             gamma, optimizer, loss_fn, batch_size)
 
             state = next_state
 
-        # Update the target network every target_net_update_steps episodes
         if episode_num % target_net_update_steps == 0:
-            print('Updating target network...')
-            # This will copy the weights of the policy network to the target network
             target_net.load_state_dict(policy_net.state_dict())
 
         reward_hist.append(score)
-
-        print(
-            f"EPISODE: {episode_num + 1} - FINAL SCORE: {score} - Temperature: {traj}")
 
     env.close()
 
