@@ -4,6 +4,12 @@ Note: I have not finished implementing the algorithms marked as "TODO" below. Un
 
 Implementations and visualizations of core search and optimization algorithms.
 
+## Environment Setup
+```
+conda env create -f environment.yml
+conda activate sno
+```
+
 ## Gradient Descent 
 Given a once differentiable function, gradient descent gives us a way to identify a local minimum of the function. The figure below shows gradient descent applied to minimizing the function $f(x_1, x_2, x_3) = x_1^2 + x_2^2 + x_3^2$. It takes roughly 250 iterations to find the minimum.
 
