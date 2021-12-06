@@ -11,7 +11,7 @@ def pick_action(s, eps, env, Q):
         return np.argmax(Q[s])
 
 
-def deep_q_learning(env, gamma, alpha, iterations, eps=0.1):
+def tabular_q_learning(env, gamma, alpha, iterations, eps=0.1):
     """
     Goal: Estimate the optimal policy without knowing the transition probabilities.
     """
@@ -47,7 +47,7 @@ if __name__ == '__main__':
     eps = 0.4
     iterations = 1000000
     env.render()
-    Q, training_rewards = deep_q_learning(env.env, gamma, alpha, iterations, eps)
+    Q, training_rewards = tabular_q_learning(env.env, gamma, alpha, iterations, eps)
     policy = np.argmax(Q, axis=1)
     value_function = np.max(Q, axis=1)
     # print(value_function)

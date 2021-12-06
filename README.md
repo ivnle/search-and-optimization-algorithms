@@ -35,8 +35,7 @@ Search gradient is the first stochastic algorithm we've introduced that leverage
 ![](figures/search_grad.png)
 
 ## A* search
-A* search is basically Dijkstra's algorithm but augmented with a heuristic function. Our goal is to find the least cost path between some start node and goal node. In our implementation, we use manhattan distance as our heuristic function. 
-The darker cells are obstacles that our agent cannot pass through. The yellow and green cells represent the goal and start nodes respectively. The goal is to move from the start node to the goal node in the fewest number of steps.
+A* search is basically Dijkstra's algorithm but augmented with a heuristic function. Our goal is to find the least cost path between some start node and goal node. In our implementation, we use manhattan distance as our heuristic function. The darker cells are obstacles that our agent cannot pass through. The yellow and green cells represent the goal and start nodes respectively. The goal is to move from the start node to the goal node in the fewest number of steps. The path that A* finds is the yellow path connecting the goal and start nodes.
 
 ![](figures/a_star_maze.png)
 ![](figures/a_star_path.png)
@@ -48,19 +47,28 @@ TODO
 TODO
 
 ## Value iteration
+When we know the the transition probabilities of our environment, we can use value iteration or policy iteration to find the optimal policy and value function. In value iteration, we iteratively perform Bellman updates to until we converge on a value function that satisfies the Bellman equation (over our states). Below is a visualization of the optimal value function that value iteration finds. The environment is `FrozenLake-v1` from OpenAI's Gym library.
+
 ![](figures/val_it.png)
 
 ## Policy iteration
+In policy iteration, we switch back and forth between generating a new policy and evaluating that policy until we converge upon a policy that can no longer improve. We see that policy iteration finds the same optimal value function as value iteration for `FrozenLake-v1`.
+
 ![](figures/policy_it.png)
 
 ## Monte Carlo Policy Evaluation 
+When we do not know the transition probabilities of our environment, we can employ Monte Carlo policy evaluation to estimate the value of a given policy. The idea is simple: simulate many trajectories with the given policy and average the results. The figure below is the estimated value function of the policy found by our previous algorithm, policy iteration.
+
 ![](figures/monte_carlo_eval.png)
 
 ## Temporal Difference Policy Evaluation
+Temporal difference policy evaluation is also a way to estimate the value of a given policy if you do not know the transition probabilities. Instead of waiting for the entire trajectory to finish, temporal difference lets us incrementally update the value function one sample (action) at a time by leveraging the Bellman equation. The figure below is the estimated value function of the policy found by policy iteration.
 
 ![](figures/temp_diff.png)
 
+
 ## Tabular Q learning
+The previous to algorithms dealt with how to evaluate a given policy when we don't know the transition probabilities of the environment. What if we wanted to find the optimal policy instead? Tabular Q learning lets us do just that by using an epsilon-greedy policy and iteratively updating our Q values (state-action value function).
 
 ![](figures/tab_q_learning.png)
 
